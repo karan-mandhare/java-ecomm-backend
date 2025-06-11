@@ -1,10 +1,12 @@
-FROM maven:3.8.4-openjdk-17-slim AS build
-
-COPY . .
-
+# Build stage
+FROM maven:3.8.5-openjdk-17-slim AS build
+COPY pom.xml .
+COPY src ./src
 RUN mvn clean package -DskipTests
 
+# Run stage
 FROM openjdk:17-jdk-slim
-COPY --from=build target/*.jar demo.jar
+COPY --from=build target/*.jar app.jar
 EXPOSE 8080
-ENTRYPOINT ["java", "-jar", "demo.jar"]
+ENTRYPOINT ["java", "-jar", "app.jar"]
+ 
