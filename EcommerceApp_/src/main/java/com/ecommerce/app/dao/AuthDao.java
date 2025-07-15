@@ -6,6 +6,7 @@ import com.ecommerce.app.request.RegisterUser;
 
 public interface AuthDao {
 
+	// change to commit from intelljidea
 	public Integer createUser(RegisterUser user);
 	public CommonResponse<LoginResponse> loginUser(String email, String password);
 }
